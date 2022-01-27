@@ -1,0 +1,13 @@
+name: 'YARN TEST'
+description: 'Node Install and Build'
+runs:
+  using: "composite"
+  steps:
+  - name: Test
+    uses: borales/actions-yarn@master
+    with:
+      cmd: test # will run `yarn test` command
+  - name: Test Integration
+    uses: borales/actions-yarn@master
+    with:
+      cmd: integration # will run `yarn test` command
