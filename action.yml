@@ -3,6 +3,18 @@ description: 'Node Install and Build'
 runs:
   using: "composite"
   steps:
+  # - name: Make package.json executable
+  #   run: chmod 777 ./package.json
+  #   shell: bash
+  # - name: Make package.json executable
+  #   run: chmod +x ./package.json
+  #   shell: bash
+  - name: Set User 0
+    run: npm config set user 0
+    shell: bash
+  - name: Set unsafe-perm true
+    run: npm config set unsafe-perm true
+    shell: bash
   - name: Test
     uses: borales/actions-yarn@master
     with:
