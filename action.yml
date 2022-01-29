@@ -6,9 +6,9 @@ runs:
   # - name: Make package.json executable
   #   run: chmod 777 ./package.json
   #   shell: bash
-  # - name: Make package.json executable
-  #   run: chmod +x ./package.json
-  #   shell: bash
+  - name: Make jest executable
+    run: chmod +rwx ./node_modules/.bin/jest
+    shell: bash
   - name: Set User 0
     run: npm config set user 0
     shell: bash
