@@ -1,5 +1,14 @@
 name: 'YARN TEST'
 description: 'Node Install and Build'
+inputs:
+  tests_filter:
+    description: 'Filter for tests'
+    required: true
+    default: ''
+  integration_filter:
+    description: 'Filter for integration tests'
+    required: true
+    default: ''
 runs:
   using: "composite"
   steps:
@@ -18,8 +27,8 @@ runs:
   - name: Test
     uses: borales/actions-yarn@master
     with:
-      cmd: test # will run `yarn test` command
+      cmd: test ${{ inputs.tests_filter }} # will run `yarn test` command
   - name: Test Integration
     uses: borales/actions-yarn@master
     with:
-      cmd: integration # will run `yarn test` command
+      cmd: integration ${{ inputs.integration_filter }} # will run `yarn integration` command
