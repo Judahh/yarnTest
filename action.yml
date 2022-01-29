@@ -1,6 +1,14 @@
 name: 'YARN TEST'
 description: 'Node Install and Build'
 inputs:
+  run_test:
+    description: 'Run tests'
+    required: true
+    default: 'true'
+  run_integration:
+    description: 'Run integration tests'
+    required: true
+    default: 'true'
   tests_filter:
     description: 'Filter for tests'
     required: true
@@ -25,10 +33,12 @@ runs:
     run: npm config set unsafe-perm true
     shell: bash
   - name: Test
+    if: ${{ inputs.run_test == 'true' }}
     uses: borales/actions-yarn@master
     with:
       cmd: test ${{ inputs.tests_filter }} # will run `yarn test` command
   - name: Test Integration
+    if: ${{ inputs.run_integration == 'true' }}
     uses: borales/actions-yarn@master
     with:
       cmd: integration ${{ inputs.integration_filter }} # will run `yarn integration` command
