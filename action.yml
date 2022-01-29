@@ -9,6 +9,10 @@ inputs:
     description: 'Run integration tests'
     required: true
     default: 'true'
+  change_permissions:
+    description: 'Change permissions'
+    required: true
+    default: 'false'
   tests_filter:
     description: 'Filter for tests'
     required: true
@@ -24,12 +28,15 @@ runs:
   #   run: chmod 777 ./package.json
   #   shell: bash
   - name: Make jest executable
+    if: ${{ inputs.change_permissions == 'true' }}
     run: chmod +rwx ./node_modules/.bin/jest
     shell: bash
   - name: Set User 0
+    if: ${{ inputs.change_permissions == 'true' }}
     run: npm config set user 0
     shell: bash
   - name: Set unsafe-perm true
+    if: ${{ inputs.change_permissions == 'true' }}
     run: npm config set unsafe-perm true
     shell: bash
   - name: Test
